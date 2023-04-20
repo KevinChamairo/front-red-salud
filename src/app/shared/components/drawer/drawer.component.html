@@ -1,0 +1,276 @@
+<div class="drawer {{ class('drawer') }}">
+  <img
+    src="/assets/svg/retractil.svg"
+    alt="arrow"
+    class="boton"
+    (click)="oyc()"
+  />
+  <div class="logo" (click)="(null)">
+    <img src="/assets/svg/logo.svg" alt="logo" />
+  </div>
+
+  <div class="change">
+    <button mat-flat-button color="accent" class="boton-cambio">
+      <p *ngIf="class('drawer') == 'opened'; else sync">Cambio de plataforma</p>
+    </button>
+  </div>
+
+  <div class="title">
+    <p class=" {{ class('drawer') == 'opened' ? '' : 'opacity' }} ">
+      Admin Red Salud
+    </p>
+  </div>
+
+  <!-- panel desplegable para las rutas  -->
+
+  <!-- <div class="modulos" style="color: #01387b">
+    <mat-accordion>
+      <mat-expansion-panel class="modulo {{ class('modulo') }}">
+        <mat-expansion-panel-header style="border-radius: none">
+          <img src="../../../../assets/svg/Contabilidad-inactivo.svg" />
+          <h4
+            class="icono"
+            style="margin-top: auto"
+            *ngIf="class('drawer') == 'opened'"
+          >
+            Contabilidad
+          </h4>
+        </mat-expansion-panel-header>
+
+        <button mat-flat-button class="vista">
+          <div class="txt">
+            <span
+              style="
+                color: #cc1d23;
+                margin-right: 25px;
+                height: 37px;
+                font-size: 27px;
+              "
+            >
+              -
+            </span>
+            <h4 style="margin-top: 14px">Ventas</h4>
+          </div>
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel class="modulo {{ class('modulo') }}">
+        <mat-expansion-panel-header>
+          <mat-icon
+            color="red"
+            style="margin-right: 30px; height: 30px; margin-top: auto"
+            >settings</mat-icon
+          >
+          <h4
+            class="icono"
+            style="margin-top: auto"
+            *ngIf="class('drawer') == 'opened'"
+          >
+            Mesa de Partes
+          </h4>
+        </mat-expansion-panel-header>
+
+        <button mat-flat-button class="vista">
+          <div class="txt">
+            <span
+              style="
+                color: #cc1d23;
+                margin-right: 25px;
+                height: 37px;
+                font-size: 27px;
+              "
+            >
+              -
+            </span>
+            <h4 style="margin-top: 14px">Documentos Recibidos</h4>
+          </div>
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div> -->
+
+  <div class="modulos" >
+    <mat-accordion *ngFor="let item of ModulesFromUser">
+      <mat-expansion-panel class="modulo {{ class('modulo') }}">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+
+            <img
+              *ngIf="item.name == 'Contabilidad' "
+              class="icon-inactivo"
+              src="../../../../assets/svg/Contabilidad-inactivo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <img
+              *ngIf="item.name == 'Contabilidad' "
+              class="icon-activo"
+              src="../../../../assets/svg/Contabilidad-activo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <img
+            *ngIf="item.name == 'Mesa de Partes' "
+              class="icon-inactivo"
+              src="../../../../assets/svg/Mesa de Partes-inactivo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <img
+            *ngIf="item.name == 'Mesa de Partes' "
+              class="icon-activo"
+              src="../../../../assets/svg/Mesa de Partes-activo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <img
+            *ngIf="item.name == 'Suscripcion' "
+            class="icon-inactivo"
+            src="../../../../assets/svg/Contabilidad-inactivo.svg"
+            alt=""
+            style="margin-right: 8px; height: 25px"
+          />
+          <img
+          *ngIf="item.name == 'Suscripcion' "
+            class="icon-activo"
+            src="../../../../assets/svg/Contabilidad-activo.svg"
+            alt=""
+            style="margin-right: 8px; height: 25px"
+          />
+            <img
+            *ngIf="item.name == 'Autorizaciones' "
+            class="icon-inactivo"
+            src="../../../../assets/svg/Mesa de Partes-inactivo.svg"
+            alt=""
+            style="margin-right: 8px; height: 25px"
+          />
+          <img
+          *ngIf="item.name == 'Autorizaciones' "
+            class="icon-activo"
+            src="../../../../assets/svg/Mesa de Partes-activo.svg"
+            alt=""
+            style="margin-right: 8px; height: 25px"
+          />
+            <h4 class="panel-title-text">{{item.name}}</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button  *ngFor="let view of item.views" mat-flat-button class="vista" (click)="probando(view.id)">
+          <div class="txt">
+            <!-- <img src="../../../../assets/svg/guion-verde.svg" alt="" /> -->
+            <span
+              style="font-style: bold; color: #01387b; margin: -10px 6px 0 23px"
+              >-</span
+            >
+            <p>{{view.name}}</p>
+          </div>
+        </button>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <mat-accordion>
+      <mat-expansion-panel class="modulo {{ class('modulo') }}">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <img
+              class="icon-inactivo"
+              src="../../../../assets/svg/Mesa de Partes-inactivo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <img
+              class="icon-activo"
+              src="../../../../assets/svg/Mesa de Partes-activo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <h4 class="panel-title-text">Autorizaciones</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button mat-flat-button class="vista" (click)="ir3()">
+          <div class="txt">
+
+            <span
+              style="font-style: bold; color: #01387b; margin: -10px 6px 0 23px"
+              >-</span
+            >
+            <p> Autorizaciones Especiales</p>
+          </div>
+        </button>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion>
+      <mat-expansion-panel class="modulo {{ class('modulo') }}">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <img
+              class="icon-inactivo"
+              src="../../../../assets/svg/Mesa de Partes-inactivo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <img
+              class="icon-activo"
+              src="../../../../assets/svg/Mesa de Partes-activo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <h4 class="panel-title-text">Siniestros</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button mat-flat-button class="vista" (click)="ir4()">
+          <div class="txt">
+
+            <span
+              style="font-style: bold; color: #01387b; margin: -10px 6px 0 23px"
+              >-</span
+            >
+            <p>Registro de Gasto</p>
+          </div>
+        </button>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <!-- <mat-accordion>
+      <mat-expansion-panel class="modulo {{ class('modulo') }}">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <img
+              class="icon-inactivo"
+              src="../../../../assets/svg/Contabilidad-inactivo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <img
+              class="icon-activo"
+              src="../../../../assets/svg/Contabilidad-activo.svg"
+              alt=""
+              style="margin-right: 8px; height: 25px"
+            />
+            <h4 class="panel-title-text">Suscripcion</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <button mat-flat-button class="vista" (click)="ir5()">
+          <div class="txt">
+
+            <span
+              style="font-style: bold; color: #01387b; margin: -10px 6px 0 23px"
+              >-</span
+            >
+            <p>Tramas Brokerrr</p>
+          </div>
+        </button>
+
+      </mat-expansion-panel>
+    </mat-accordion> -->
+
+  </div>
+</div>
+
+<ng-template #sync>
+  <mat-icon> sync</mat-icon>
+</ng-template>

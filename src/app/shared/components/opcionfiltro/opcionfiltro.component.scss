@@ -1,0 +1,226 @@
+// .filter {
+//   background: #ffffff;
+//   box-shadow: 0px 0px 14px rgba(202, 229, 249, 0.5);
+//   border-radius: 22px;
+//   margin: 1.5rem auto;
+//   height: 11rem;
+//   width: 95% !important;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   justify-content: space-evenly;
+
+//   h3 {
+//     color: #01387b !important;
+//     margin-left: 1.5rem;
+//     font-weight: 700;
+//     font-size: 22px;
+//     padding-top: 7px;
+//   }
+//   .fechas {
+//     width: 93% !important;
+//     display: flex !important;
+//     align-items: center;
+//     margin-left: 1.5rem;
+//     padding: 0 1rem;
+//     // border: 1px solid red;
+//     justify-content: initial;
+//     padding: 0 2%;
+//     box-sizing: border-box;
+//     margin-top: -8px;
+//     .fecha {
+//       display: flex;
+//       align-items: center;
+//       margin-right: 3rem;
+//       // border: 1px solid blue;
+//       width: 35%;
+//       h4 {
+//         color: #01387b;
+//         font-weight: 700;
+//         margin-right: 1rem;
+//       }
+//       .inputse {
+//         color: #6a7183;
+//       }
+//     }
+//     .boton {
+//       width: 8rem !important;
+//       height: 3rem;
+//       background: #cc1d23;
+//       border-radius: 30.5px;
+//       color: white;
+//       margin-top: -22px;
+//       p {
+//         margin-top: 6px;
+//       }
+//     }
+//   }
+// }
+
+// .uno {
+//   margin-left: -19px;
+// }
+.bo {
+  margin: 0 auto;
+  cursor: pointer;
+  display: flex;
+  width: 7rem;
+  color: white;
+  background-color: #cc1d23;
+  border: none;
+  border-radius: 22px;
+  align-items: flex-start;
+  padding-top: 10px;
+  padding-left: 17px;
+  font-weight: bold;
+  justify-content: center;
+  margin-left: 3px;
+  p {
+    padding-top: 2px;
+  }
+  .ico {
+    margin-top: -2px;
+    margin-left: 8px;
+  }
+}
+
+//abel
+.filter {
+
+  background: #ffffff;
+  box-shadow: 0px 0px 14px rgba(202, 229, 249, 0.5);
+  border-radius: 22px;
+  // margin: 1.5rem auto 1.5rem 0;
+  margin-top: 35px;
+  height: 15rem;
+  width: 99%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 43px 0 36px 0;
+
+  h3 {
+    color: #01387b;
+    font-weight: 700;
+    margin-left: 2.8rem;
+  }
+
+  .fechas {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+    .fecha {
+      display: flex;
+      align-items: center;
+      margin-right: 3rem;
+      align-items: baseline;
+      h4 {
+        color: #01387b;
+        font-weight: 700;
+        margin-right: 1rem;
+      }
+      .input {
+        color: #6a7183;
+      }
+    }
+    .boton {
+      width: 8rem;
+      height: 3rem;
+      background: #008467;
+      border-radius: 30.5px;
+      color: white;
+    }
+  }
+}
+.mat-calendar-body-selected {
+  background-color: #cc1d23 !important;
+  color: white;
+}
+.mat-calendar-body-selected {
+  background-color: #cc1d23 !important;
+  color: white !important;
+}
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #cc1d23 !important;
+}
+
+// select
+.opcion {
+  width: 93%;
+  margin: 10px auto;
+  background-color: #f3f9ff;
+  border-radius: 20px;
+  color: #838b9c;
+  padding: 18px 0 13px 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  option {
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+.linea {
+  //   border: 1px solid #6a7183;
+  //   width: 95%;
+  //   margin: 0 auto;
+  //   margin-top: 10px;
+  //   margin-bottom: 14px;
+  border: 0.1px solid #e4e4e4;
+  width: 92%;
+  margin: 0 auto;
+  margin-top: 17px;
+  margin-bottom: 19px;
+}
+
+.ti {
+  font-family: "Roboto";
+  color: #01387b;
+  line-height: 35px;
+  letter-spacing: 0.24px;
+  font-size: 22px;
+}
+
+.ni {
+  color: #f3f9ff;
+  padding: 2px 20px;
+  text-align: center;
+  border-radius: 24px;
+  border: 1px solid #cc1d23;
+  transition: all 300ms;
+}
+.ni:hover {
+  color: #cc1d23;
+  background-color: #f3f9ff;
+}
+
+// ma
+.select-pag3 {
+  display: block;
+  // width: 37rem;
+  // width: 184%;
+  // background-color: transparent;
+  // border: 2px solid #2272c0;
+  // padding: 1% 3px 1% 10px;
+  padding: 17px;
+  border-radius: 27px;
+  color: #808896;
+  font-weight: bold;
+  background-color: #f3f9ff !important;
+  font-size: 15px;
+  margin-left: 38px;
+  width: 91%;
+  .ss {
+    background-color: #f3f9ff !important;
+  }
+  option {
+    color: #808896;
+    font-weight: bold;
+    background-color: #f3f9ff;
+    font-size: 15px;
+  }
+}

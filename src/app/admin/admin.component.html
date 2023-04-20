@@ -1,0 +1,8 @@
+<div class="main">
+  <app-drawer (cl)="oyc($event)"></app-drawer>
+  <!-- <app-drawer [modulos]="modulos" (cl)="oyc($event)"></app-drawer> -->
+  <div class="contenido {{ class() }} ">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </div>
+</div>

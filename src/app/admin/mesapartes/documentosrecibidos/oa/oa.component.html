@@ -1,0 +1,491 @@
+<div class="oaContainer">
+  <div class="typeOfOA">
+    <div class="OA">
+      <h1>
+        Liquidacion
+        <mat-radio-button   [disabled]="isActive"  (click)="isActive? setTypeLiquidacion(2):setTypeLiquidacion(1)"></mat-radio-button>
+      </h1>
+      <h1>Rembolso      <mat-radio-button (click)="setTypeLiquidacion(2)" checked="true"></mat-radio-button></h1>
+    </div>
+  </div>
+  <div class="containerInputsFilter">
+    <form style="width: 95%" [formGroup]="formConsultOA">
+      <div class="container">
+        <div class="inputFilter">
+          <div class="numOA">
+            <p style="width: 23%">N° OA</p>
+            <div class="containerInput">
+              <input
+                matInput
+                formControlName="numeroOA"
+                placeholder="Ingresa el numero OA"
+              />
+            </div>
+          </div>
+          <div class="dni">
+            <p style="width: 23%">DNI</p>
+            <div class="containerInput">
+              <input
+                matInput
+                formControlName="dni"
+                placeholder="Ingresa el DNI"
+              />
+            </div>
+          </div>
+          <div class="fecha">
+            <p style="width: 23%">Fecha</p>
+            <div class="containerInput">
+              <input
+                style="padding-left: 15px"
+                readonly
+                matInput
+                formControlName="fecha"
+                [matDatepicker]="picker2"
+                placeholder="dd/mm/aaaa"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </div>
+          </div>
+        </div>
+        <div class="searchBtn">
+          <div class="btnSearch" (click)="consultarOA()">Buscar</div>
+        </div>
+      </div>
+      <div>
+        <div
+          style="
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <div class="outlet-hijo2" *ngIf="mostrartabla">
+            <div class="main-table">
+              <div class="table-head">
+                <div class="paginador">
+                  <h4>Mostrar</h4>
+                  <div class="sell" style="position: relative">
+                    <mat-icon class="flecha">expand_more</mat-icon>
+                    <select class="select-pag">
+                      <option value="10" selected>10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="75">75</option>
+                      <option value="100">100</option>
+                    </select>
+                  </div>
+                  <p style="color: #01387b; font-weight: 400; margin-left: 6px">
+                    Registros
+                  </p>
+                </div>
+
+                <div class="space"></div>
+                <div class="buscador">
+                  <input
+                    type="text"
+                    class="buscador-input"
+                    placeholder="Buscar"
+                  />
+                  <img
+                    class="lupa"
+                    src="../../../../assets/svg/lupa.svg"
+                    alt=""
+                  />
+                </div>
+                <div class="filtro"></div>
+              </div>
+
+              <div *ngIf="dataOrdenAtencion.length != 0" class="table-body">
+                <table matSort (matSortChange)="sortData($event)">
+                  <tr style="background: #d5edff; height: 2.8rem">
+                    <td mat-sort-header="id">
+                      <h4>
+                        F. ATENCION
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="ruc">
+                      <h4>
+                        N° OA
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="razon_social">
+                      <h4>
+                        Estado at Observada<img
+                          src="../../../../assets/svg/sort.svg"
+                          alt=""
+                        />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="nombre_comercial">
+                      <h4>
+                        Generada
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="fecha_recepcion">
+                      <h4>
+                        DNI <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="fecha_emision">
+                      <h4>
+                        Afiliado
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="documento">
+                      <h4>
+                        Agregar
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                  </tr>
+                  <tr
+                    *ngFor="
+                      let item of dataOrdenAtencion
+                        | paginate
+                          : {
+                              id: 'paginador2',
+                              itemsPerPage: grupo2,
+                              currentPage: page2
+                            }
+                    "
+                    class="table-body-row"
+                  >
+                    <td>{{ item.fecha_atencion }}</td>
+                    <td>{{ item.num_orden }}</td>
+                    <td>{{ item.estado }}</td>
+                    <td>{{ item.nombre_comercial }}</td>
+                    <td>{{ item.dni }}</td>
+                    <td>{{ item.afiliado }}</td>
+                    <td>
+                      <div (click)="addSiniestro(item)">
+                        <img
+                          style="cursor: pointer"
+                          src="../../../../assets/svg/mesa-de-partes/boton-agregar.svg"
+                          alt=""
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div
+                *ngIf="dataOrdenAtencion.length != 0; else nodata"
+                class="table-foot"
+              >
+                <h4>
+                  Del
+                  {{ ((page2 > 1 ? page2 : 1) - 1) * grupo2 + 1 }} al
+                  {{
+                    ((page2 > 1 ? page2 : 1) - 1) * grupo2 + grupo2 >
+                    pc.getTotalItems()
+                      ? pc.getTotalItems()
+                      : (((page > 1 ? page2 : 1) - 1) * grupo2 + grupo2
+                        | number: "2.0")
+                  }}
+                  de {{ pc.getTotalItems() }} registros
+                </h4>
+                <div class="foot-botones">
+                  <pagination-template
+                    id="paginador2"
+                    #pc="paginationApi"
+                    (pageChange)="page2 = $event"
+                  >
+                    <div class="custom-pagination">
+                      <button
+                        mat-mini-fab
+                        (click)="pc.previous()"
+                        disabled="{{ pc.isFirstPage() }}"
+                        class="foot-boton {{
+                          pc.isFirstPage() ? 'blanco' : ''
+                        }} "
+                      >
+                        <mat-icon>arrow_back</mat-icon>
+                      </button>
+                      <div
+                        class="page-number"
+                        *ngFor="let page2 of pc.pages"
+                        [class.current]="pc.getCurrent() === page2.value"
+                      >
+                        <span
+                          (click)="pc.setCurrent(page2.value)"
+                          *ngIf="pc.getCurrent() !== page2.value"
+                          >{{ page2.label }}</span
+                        >
+                        <div *ngIf="pc.getCurrent() === page2.value">
+                          <span>{{ page2.label }}</span>
+                        </div>
+                      </div>
+                      <button
+                        mat-mini-fab
+                        (click)="pc.next()"
+                        disabled="{{ pc.isLastPage() }}"
+                        class="foot-boton {{
+                          pc.isLastPage() ? 'blanco' : ''
+                        }} "
+                      >
+                        <mat-icon>arrow_forward</mat-icon>
+                      </button>
+                    </div>
+                  </pagination-template>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #nodata>
+              <tr>
+                <td>No hay data</td>
+              </tr>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div
+  class="oaContainer"
+  *ngIf="mostrartablaAgregarOA"
+  style="margin-bottom: 20px"
+>
+  <div class="containerInputsFilter">
+    <form style="width: 95%" [formGroup]="formConsultOA">
+      <div>
+        <div
+          style="
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <div class="outlet-hijo3" *ngIf="mostrartablaAgregarOA">
+            <div class="main-table">
+              <div class="table-head">
+                <div class="paginador">
+                  <h4>Mostrar</h4>
+                  <div class="sell" style="position: relative">
+                    <mat-icon class="flecha">expand_more</mat-icon>
+                    <select class="select-pag">
+                      <option value="10" selected>10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="75">75</option>
+                      <option value="100">100</option>
+                    </select>
+                  </div>
+                  <p style="color: #01387b; font-weight: 400; margin-left: 6px">
+                    Registros
+                  </p>
+                </div>
+
+                <div class="space"></div>
+                <div class="buscador">
+                  <input
+                    type="text"
+                    class="buscador-input"
+                    placeholder="Buscar"
+                  />
+                  <img
+                    class="lupa"
+                    src="../../../../assets/svg/lupa.svg"
+                    alt=""
+                  />
+                </div>
+                <div class="filtro"></div>
+              </div>
+
+              <div *ngIf="dataOrdenAtencion.length != 0" class="table-body">
+                <table matSort (matSortChange)="sortData2($event)">
+                  <tr style="background: #d5edff; height: 2.8rem">
+                    <td mat-sort-header="fecha">
+                      <h4>
+                        F. ATENCION
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="oa">
+                      <h4>
+                        N° OA
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="estado">
+                      <h4>
+                        Estado at Observada<img
+                          src="../../../../assets/svg/sort.svg"
+                          alt=""
+                        />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="nombre">
+                      <h4>
+                        Generada
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="dni">
+                      <h4>
+                        DNI <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="afiliado">
+                      <h4>
+                        Afiliado
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="importeasd">
+                      <h4>
+                        Archivos
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="importeasd2s">
+                      <h4>
+                        Subir Archivos
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="importe">
+                      <h4>
+                        Importe
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                    <td mat-sort-header="aea">
+                      <h4>
+                        Eliminar
+                        <img src="../../../../assets/svg/sort.svg" alt="" />
+                      </h4>
+                    </td>
+                  </tr>
+                  <tr
+                    *ngFor="
+                      let item of dataOrdenAtencionNueva
+                        | paginate
+                          : {
+                              id: 'paginador2nuevo',
+                              itemsPerPage: grupo2nuevo,
+                              currentPage: page2nuevo
+                            }
+                    "
+                    class="table-body-row"
+                  >
+                    <td>{{ item.fecha_atencion }}</td>
+                    <td>{{ item.num_orden }}</td>
+                    <td>{{ item.estado }}</td>
+                    <td>{{ item.nombre_comercial }}</td>
+                    <td>{{ item.dni }}</td>
+                    <td>{{ item.afiliado }}</td>
+                    <td ><p *ngFor="let items of item.archivos" (click)="openUrl(items.url)" >{{items.name}}</p><br></td>
+                    <td>              <div class="iconUrl" style="    margin-right: 20px;
+                      margin-top: 8px;">
+                        <input style="display: none;" type="file" #uploadImg (change)="upload($event)"
+                        multiple>
+                        <img (click)="uploadImg.click()" src="../../../../assets/svg/mesa-de-partes/subir-archivo.svg" alt="">
+
+                    </div></td>
+                    <td><input type="text" class="importe"     formControlName="importe" (ngModelChange) = "validarImporte()" /></td>
+                    <td>
+                      <div (click)="deleteOAUser(item)">
+                        <img
+                          style="cursor: pointer"
+                          src="../../../../assets/svg/mesa-de-partes/trash.svg"
+                          alt=""
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div
+                *ngIf="dataOrdenAtencion.length != 0; else nodata"
+                class="table-foot"
+              >
+                <h4>
+                  Del
+                  {{
+                    ((page2nuevo > 1 ? page2nuevo : 1) - 1) * grupo2nuevo + 1
+                  }}
+                  al
+                  {{
+                    ((page2nuevo > 1 ? page2nuevo : 1) - 1) * grupo2nuevo +
+                      grupo2nuevo >
+                    pc2.getTotalItems()
+                      ? pc2.getTotalItems()
+                      : (((pagenuevo > 1 ? page2nuevo : 1) - 1) * grupo2nuevo +
+                          grupo2nuevo | number: "2.0")
+                  }}
+                  de {{ pc2.getTotalItems() }} registros
+                </h4>
+                <div class="foot-botones">
+                  <pagination-template
+                    id="paginador2nuevo"
+                    #pc2="paginationApi"
+                    (pageChange)="page2nuevo = $event"
+                  >
+                    <div class="custom-pagination">
+                      <button
+                        mat-mini-fab
+                        (click)="pc2.previous()"
+                        disabled="{{ pc2.isFirstPage() }}"
+                        class="foot-boton {{
+                          pc2.isFirstPage() ? 'blanco' : ''
+                        }} "
+                      >
+                        <mat-icon>arrow_back</mat-icon>
+                      </button>
+                      <div
+                        class="page-number"
+                        *ngFor="let page2nuevo of pc2.pages"
+                        [class.current]="pc2.getCurrent() === page2nuevo.value"
+                      >
+                        <span
+                          (click)="pc2.setCurrent(page2nuevo.value)"
+                          *ngIf="pc2.getCurrent() !== page2nuevo.value"
+                          >{{ page2nuevo.label }}</span
+                        >
+                        <div *ngIf="pc2.getCurrent() === page2nuevo.value">
+                          <span>{{ page2nuevo.label }}</span>
+                        </div>
+                      </div>
+                      <button
+                        mat-mini-fab
+                        (click)="pc2.next()"
+                        disabled="{{ pc2.isLastPage() }}"
+                        class="foot-boton {{
+                          pc2.isLastPage() ? 'blanco' : ''
+                        }} "
+                      >
+                        <mat-icon>arrow_forward</mat-icon>
+                      </button>
+                    </div>
+                  </pagination-template>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #nodata>
+              <tr>
+                <td>No hay data</td>
+              </tr>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <app-loading *ngIf="loading"></app-loading>
+</div>
+
+
+

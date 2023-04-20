@@ -1,0 +1,19 @@
+<div class="wildcard-automatic-debit-declaration-modal">
+    <div class="position element-space">
+        <img       src="../../../../assets/svg/mesa-de-partes/proceso-exitoso.svg"  style="margin-bottom: 14px;" alt="">
+        <p class="saveSuccess">Datos generados correctamente</p>
+
+        <div class="containerDerivados">
+            <span  *ngIf="siniestroDerivada>0" style="margin-bottom: 5px;">{{siniestroDerivada}} facturas derivadas a Siniestros</span>
+            <span  *ngIf="contabilidadDerivada>0"  style="margin-bottom: 5px;">{{contabilidadDerivada}} facturas derivadas a Contabilidad</span>
+            <span *ngIf="administracionDerivada>0"style="margin-bottom: 5px;"> {{administracionDerivada}} facturas derivadas para Administraciones</span>
+      
+    
+        </div>
+        <div  class="btnSuccess" (click)="salir()">
+            <span class="btn">Aceptar</span> 
+            
+        </div>
+    </div>
+  </div>
+  

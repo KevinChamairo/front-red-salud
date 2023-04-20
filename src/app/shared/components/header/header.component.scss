@@ -1,0 +1,71 @@
+.header {
+  width: 95%;
+  height: 4.5rem;
+  margin: 1rem auto 0.5rem auto;
+  background: #ffffff;
+  box-shadow: 0px 0px 12px rgba(198, 226, 255, 0.506687);
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    color: #6a7183;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    margin-left: 3rem;
+
+    p {
+      margin: 0;
+      span:last-child {
+        color: #cc1d23;
+      }
+    }
+  }
+
+  .info {
+    margin-right: 3rem;
+    cursor: pointer;
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .nombre {
+      text-align: center;
+
+      h4 {
+        margin: 0;
+        color: #2271bf;
+        font-weight: bold;
+      }
+      p {
+        margin: 0;
+        font-size: 13px;
+      }
+    }
+    .foto {
+      height: 60%;
+      margin: 0 1rem;
+      img {
+        height: 100%;
+        border-radius: 100%;
+      }
+    }
+  }
+}
+
+.bien {
+  font-size: 13px;
+  font-family: "Roboto";
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0.2px;
+  text-align: right;
+  color: #80848e;
+}

@@ -1,0 +1,67 @@
+<div class="filter">
+  <h3 class="ti">Elige una opcion</h3>
+  <!-- <select class="opcion" [(ngModel)]="op">
+    <option [value]="0">Seleccionar</option>
+    <option [value]="item2.type" *ngFor="let item2 of datocobro[0].clients">
+      <span *ngIf="item2.type == 1">Clientes:</span>
+      <span *ngIf="item2.type == 2">Brokers:</span> {{ item2.document_id }} -
+      {{ item2.legal_name | titlecase }}
+    </option>
+  </select> -->
+  <!--otra -->
+  <mat-select class="select-pag3" [(ngModel)]="op">
+    <mat-option class="ss" [value]="'0'">Seleccionar canal</mat-option>
+    <mat-option
+      class="ss"
+      [value]="item2.type"
+      *ngFor="let item2 of datocobro[0].clients"
+    >
+      <span *ngIf="item2.type == 1">Clientes:</span>
+      <span *ngIf="item2.type == 2">Brokers:</span> {{ item2.document_id }} -
+      {{ item2.legal_name | titlecase }}
+    </mat-option>
+  </mat-select>
+
+  <div class="linea"></div>
+  <h3 class="ti">Fechas de Cobro</h3>
+  <div class="fechas">
+    <div class="fecha">
+      <h4>Inicio</h4>
+      <mat-form-field appearance="outline" class="input">
+        <input
+          style="font-weight: bold"
+          [(ngModel)]="fe1"
+          matInput
+          [matDatepicker]="picker"
+          placeholder="dd/mm/aaaa"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="fecha">
+      <h4>Fin</h4>
+      <mat-form-field appearance="outline" class="input">
+        <input
+          style="font-weight: bold"
+          [(ngModel)]="fe2"
+          matInput
+          [matDatepicker]="picker2"
+          placeholder="dd/mm/aaaa"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- <button class="bo" (click)="b()">
+      <p>Buscar</p>
+      <mat-icon class="ico">chevron_right</mat-icon>
+    </button> -->
+    <button class="ni" mat-raised-button color="accent" (click)="b()">
+      Buscar <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+</div>

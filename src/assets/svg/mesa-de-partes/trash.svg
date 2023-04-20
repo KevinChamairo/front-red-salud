@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>trash</title>
+    <desc>Created with Sketch.</desc>
+    <g id="MESA-DE-PARTES" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MESA-DE-PARTES-agregar-OA" transform="translate(-1335.000000, -1079.000000)" fill="#CC1D23">
+            <g id="trash" transform="translate(1335.000000, 1079.000000)">
+                <path d="M12.999,4 L0.999,4 L0.999,16 C0.999,17.104 1.895,18 3,18 L10.999,18 C12.105,18 12.999,17.104 12.999,16 L12.999,4 M9.499,-0.001 L4.499,-0.001 L3.5,1 L0.999,1 C0.448,1 0,1.448 0,1.999 L0,3 L14,3 L14,1.999 C14,1.448 13.552,1 12.999,1 L10.5,1 L9.499,-0.001" id="Fill-3"></path>
+            </g>
+        </g>
+    </g>
+</svg>

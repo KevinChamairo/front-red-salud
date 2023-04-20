@@ -1,0 +1,40 @@
+<div class="header">
+  <div class="title">
+    <p *ngFor="let data of breadcrumbsUrl; let i = index">
+      <span *ngIf="i < breadcrumbsUrl.length - 1 && data !== 'mesadepartes'">
+        {{ data | titlecase }}
+      </span>
+      <span *ngIf="i < breadcrumbsUrl.length - 1 && data == 'mesadepartes'">
+         Mesa de Partes
+      </span>
+      <span class="text-0" *ngIf="i < breadcrumbsUrl.length - 1">/</span>
+      <span class="text-1" *ngIf="i == breadcrumbsUrl.length - 1 && data !== 'documentosRecibidos'" >
+        {{ data | titlecase }}
+      </span>
+      <span class="text-1" *ngIf="i == breadcrumbsUrl.length - 1  && data == 'documentosRecibidos'">
+        Documentos Recibidos 
+      </span>
+    </p>
+  </div>
+  <div class="info" [matMenuTriggerFor]="menu">
+    <div class="nombre">
+      <h4 *ngIf="userSesion.username">{{userSesion.username| titlecase}}</h4>
+      <p class="bien">Bienvenido</p>
+    </div>
+    <div class="foto">
+      <!-- <img
+        src="https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png"
+        alt=""
+      /> -->
+      <img src="../../../../assets/img/Oval-Copy-2.png" alt="" srcset="" />
+    </div>
+    <div class="i">
+      <mat-icon color="accent">keyboard_arrow_down</mat-icon>
+    </div>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu">
+  <p mat-menu-item>Ver Perfil</p>
+  <p mat-menu-item (click)="logout()">Regresar al holding</p>
+</mat-menu>

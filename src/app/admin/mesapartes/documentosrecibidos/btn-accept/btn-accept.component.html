@@ -1,0 +1,38 @@
+
+<form
+class="fo"
+[formGroup]="formSelect"
+style="
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+"
+>
+<div class="oaContainer2">
+    <div class="containerBtn">
+      <div class="estado">
+        <span>Estado</span>
+        <mat-select
+          formControlName="sele1"
+          class="select-page2"
+          placeholder="Selecciona"
+        
+          style="padding-left: 20px"
+        >
+          <mat-option [value]="0">Seleccionar canal</mat-option>
+
+          <mat-option [value]="item.id" *ngFor="let item of tipoEstado">
+            {{ item.nombre | titlecase }}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div         [ngClass]="
+      estaValidado == false ? 'btnGuardarDisabled' : 'btnGuardar'
+    " class="btnGuardar" (click)="validarEstado()">Guardar</div>
+    </div>
+  </div>
+
+  </form>
+  <app-loading *ngIf="loading"></app-loading>

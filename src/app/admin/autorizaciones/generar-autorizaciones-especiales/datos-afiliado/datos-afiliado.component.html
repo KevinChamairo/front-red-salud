@@ -1,0 +1,71 @@
+
+<div
+style="
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+"
+>
+<div class="filter" *ngIf="Asegurados.aseg_id !== 0">
+  <div class="title">
+    <h4 class="titleAfiliado">Datos del Afiliado</h4>
+  </div>
+  <div class="row1">
+    <div class="divName" style="width: 20%;">
+      <h4 class="name">Nombres y Apellidos</h4>
+      <p class="nameinfo">{{Asegurados.aseg_nom1 }} {{Asegurados.aseg_nom2}} {{Asegurados.aseg_ape1 }} {{Asegurados.aseg_ape2}}</p>
+    </div>
+
+    <div class="divider"></div>
+    <div class="divName" style="width: 20%;">
+      <h4 class="name">Tipo de Documento</h4>
+      <p class="nameinfo" *ngIf="Asegurados.tipoDoc_id == 1">DNI</p>
+      <p class="nameinfo" *ngIf="Asegurados.tipoDoc_id == 2">PASAPORTE</p>
+      <p class="nameinfo" *ngIf="Asegurados.tipoDoc_id == 3">CE</p>
+    </div>
+
+
+    <div class="divider"></div>
+
+    <div class="divName" style="width: 20%;">
+      <h4 class="name">Nº de Documento</h4>
+      <p class="nameinfo">{{Asegurados.aseg_numDoc}}</p>
+    </div>
+    <div class="divider"></div>
+    <div class="divName" style="width: 10%;">
+      <h4 class="name">Edad</h4>
+      <p class="nameinfo">{{Asegurados.edad}} años</p>
+    </div>
+  </div>
+  <div class="row1">
+      <div class="divName" style="width: 20%;">
+          <h4 class="name">Dirección</h4>
+          <p class="nameinfo">{{Asegurados.aseg_direcc}}</p>
+        </div>
+
+        <div class="divider"></div>
+        <div class="divName" style="width: 20%;">
+          <h4 class="name">Celular</h4>
+          <p class="nameinfo">{{Asegurados.aseg_telf}}</p>
+        </div>
+
+
+        <div class="divider"></div>
+
+        <div class="divName" style="width: 20%;">
+          <h4 class="name">Plan</h4>
+          <p class="nameinfo">{{Asegurados.nombre_plan}}</p>
+        </div>
+
+
+        <div class="divider"></div>
+
+        <div class="divName" style="width: 20%;">
+          <h4 class="name">Inicio de Vigencia</h4>
+          <p class="nameinfo">{{Asegurados.inicio_vigencia}}</p>
+        </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,45 @@
+@import "/src/app/admin/shared/scss/main";
+
+.comercial {
+  padding: 1rem 0;
+  h1,
+  h2,
+  h3 {
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  .two {
+    display: flex;
+  }
+
+  .fact {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    .opt {
+      width: auto;
+      .op {
+        margin-right: 3rem;
+      }
+    }
+  }
+
+  .form {
+    margin: 0 0 0 3rem;
+    .upload {
+      display: none;
+    }
+  }
+
+  .botones {
+    display: flex;
+    justify-content: center;
+  }
+
+  .largo {
+    width: 100% !important;
+  }
+}

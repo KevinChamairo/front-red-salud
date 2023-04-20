@@ -1,0 +1,201 @@
+@use "~@angular/material" as mat;
+@include mat.core();
+// Primary color
+$paleta: (
+  50: #e4eef7,
+  100: #bdd4ec,
+  200: #91b8df,
+  300: #649cd2,
+  400: #4386c9,
+  500: #2271bf,
+  600: #1e69b9,
+  700: #195eb1,
+  800: #1454a9,
+  900: #0c429b,
+  A100: #c9dbff,
+  A200: #96b9ff,
+  A400: #6397ff,
+  A700: #4a86ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+// Accent color
+$paleta2: (
+  50: #f9e4e5,
+  100: #f0bbbd,
+  200: #e68e91,
+  300: #db6165,
+  400: #d43f44,
+  500: #cc1d23,
+  600: #c71a1f,
+  700: #c0151a,
+  800: #b91115,
+  900: #ad0a0c,
+  A100: #ffdada,
+  A200: #ffa7a7,
+  A400: #ff7475,
+  A700: #ff5a5b,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$global-admin-primary: mat.define-palette($paleta);
+$global-admin-accent: mat.define-palette($paleta2);
+$global-admin-warn: mat.define-palette(mat.$red-palette);
+
+$global-admin-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $global-admin-primary,
+      accent: $global-admin-accent,
+      warn: $global-admin-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($global-admin-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif,Metropolis;
+}
+
+.mat-expansion-indicator::after {
+  color: #cc1d23 !important ;
+  margin-top: -12px !important;
+}
+
+mat-expansion-panel:active .linkConta {
+  color: #cc1d23 !important;
+  margin-top: -2px !important;
+  font-weight: bold;
+}
+//nu
+[_nghost-hgq-c45]
+  mat-expansion-panel-header[aria-expanded="true"]
+  .mat-expansion-indicator::after {
+  color: #cc1d23 !important;
+  margin-top: -2px !important;
+}
+
+// .mat-form-field-appearance-outline .mat-form-field-wrapper {
+//   margin: 0.25em 0;
+//   border: 2px solid #014194;
+//   height: 30px;
+//   border-radius: 15px;
+//   width: auto;
+// }
+// .mat-form-field-appearance-outline .mat-form-field-wrapper:hover {
+//   border: 1px solid #014194;
+// }
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0.25em 0;
+  width: 29rem;
+  color: #838b99;
+}
+.mat-select-arrow {
+  color: #cc1d23 !important;
+}
+
+//filter
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0.25em 0;
+  width: 17vw;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-wrapper{
+  margin: 0.25em 0;
+  width: 193px;
+}
+mat-datepicker-toggle {
+  color: #cc1d23 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #cc1d23 !important;
+}
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #cc1d23 !important;
+}
+::ng-deep.mat-calendar-body-selected {
+  background-color: #cc1d23 !important;
+}
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #cc1d23 !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: #cc1d23 !important;
+}
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #cc1d23 !important;
+}
+::ng-deep .mat-datepicker-toggle {
+  color: red !important;
+}
+
+// .mat-form-field-appearance-outline .mat-form-field-outline {
+//   color: #cc1d23 !important;
+// }
+.mat-select-value-text {
+  color: #838b99;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+  line-height: 24px;
+  color: #0e4890;
+  font-weight: bold;
+}
+
+.mat-checkbox-inner-container {
+  background-color: #d5edff;
+}
+
+.mat-option {
+  background-color: #f3f9ff;
+}
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+  background-color: #f3f9ff;
+}

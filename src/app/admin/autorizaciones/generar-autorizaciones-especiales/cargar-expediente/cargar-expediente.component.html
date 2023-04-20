@@ -1,0 +1,301 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  "
+>
+  <form
+    class="fo"
+    [formGroup]="formulario1"
+    style="
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    "
+  >
+    <div class="expediente">
+      <div class="title">
+        <h4 class="titleAfiliado">Expediente</h4>
+      </div>
+      <div class="row1">
+        <div class="divName" style="width: 25%; margin-right: 50px">
+          <h4 class="name" style="padding-bottom: 6px">CIE10</h4>
+
+          <div class="containerInput" style="align-items: center">
+            <input
+              [formControl]="stateCtrl"
+              type="text"
+              style="padding-left: 15px; width: 98%"
+              matInput
+              placeholder="Selecciona el diagnostico"
+              [matAutocomplete]="auto3"
+              (ngModelChange)="consultarDiagnostico()"
+            />
+            <mat-autocomplete #auto3="matAutocomplete">
+              <mat-option
+                *ngFor="let state of filteredStates | async"
+                [value]="state.descripcion"
+                (click)="pruebita(state)"
+              >
+                {{ state.descripcion }}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+
+
+
+
+
+        <mat-error
+        style="margin-top: 10px"
+        *ngIf="cie10Error"
+        >El campo CIE10 es requerido</mat-error>
+          <!-- <mat-form-field appearance="outline" class="input" style="width:400px ;">
+
+
+      </mat-form-field> -->
+        </div>
+
+        <div class="divName" style="width: 20%">
+          <h4 class="name" style="padding-bottom: 6px">Archivo expediente</h4>
+          <div class="containerInput" style="align-items: center">
+            <input
+              class="inputRazonSocial"
+              matInput
+              readonly="true"
+              placeholder="Expediente"
+              formControlName="archivoExpediente"
+              [value]="nameFile"
+              (click)="mostrarArchivo()"
+            />
+            <div class="iconUrl" style="margin-right: 20px; margin-top: 8px">
+              <input
+                style="display: none"
+                type="file"
+                #uploadImg
+                (change)="upload($event)"
+                multiple
+              />
+              <img
+                (click)="uploadImg.click()"
+                src="../../../../assets/svg/mesa-de-partes/subir-archivo.svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <mat-error
+          style="margin-top: 10px"
+          *ngIf="archivoFilError "
+          >El campo Archivo es requeridoasdasdasd</mat-error
+        >
+        </div>
+      </div>
+    </div>
+
+    <div class="tipoCliente">
+      <div class="formCheckbox">
+        <div class="containerForm">
+          <div class="containercenter">
+            <div
+              style="
+                height: 88%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-evenly;
+                flex-direction: column;
+              "
+            >
+              <mat-radio-group class="che" formControlName="motivos">
+                <mat-radio-button
+                  *ngFor="let item of motivosArray"
+                  [value]="{
+                    id: item.id,
+                    descripcion: item.descripcion
+                  }"
+                  (click)="consultService(item.id, item.descripcion)"
+                >
+                  {{ item.descripcion }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="typeForm">
+        <div class="section1" *ngIf="responseCoberturas.length > 0">
+          <mat-radio-group style="display: flex" formControlName="coberturas">
+            <div *ngFor="let item of responseCoberturas">
+              <h4>
+                <mat-radio-button
+                  [value]="{id:item.id,cobertura:item.cobertura}"
+                  (click)="validar(item.id, item.cobertura)"
+                ></mat-radio-button>
+                {{ item.cobertura }}
+              </h4>
+            </div>
+          </mat-radio-group>
+        </div>
+        <mat-radio-group
+          class="section3"
+          *ngIf="responseCoberturas.length > 0"
+          formControlName="tipoPago"
+        >
+          <h4 style="margin-left: 75px ">
+            <mat-radio-button value="Liquidacion" (click)="enableProveedores()"></mat-radio-button>
+            Liquidación
+          </h4>
+          <h4 style="margin-left: 75px ">
+            <mat-radio-button value="Reembolso" (click)="disableProveedores()"></mat-radio-button>
+            Reembolso
+          </h4>
+        </mat-radio-group>
+        <div class="section2" *ngIf="responseCoberturas.length > 0">
+          <div class="div">
+            <div class="item">
+              <input
+                [formControl]="stateProductos"
+                type="text"
+                style="padding-left: 15px; width: 98%"
+                matInput
+                (ngModelChange)="validarProducto()"
+                placeholder="Selecciona el producto"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                  *ngFor="let state of filteredProductos | async"
+                  [value]="state.producto"
+                >
+                  {{ state.producto }}
+                </mat-option>
+              </mat-autocomplete>
+
+            </div>
+
+            <!-- <div class="item">
+              <input
+                style="padding-left: 15px; width: 100%; height: 100%"
+                matInput
+                formControlName="importe"
+                placeholder="Importe"
+              />
+            </div> -->
+            <div>
+              <mat-form-field appearance="outline" class="input">
+                <input type="number" style="padding-left: 15px; width: 100%; height: 100%" placeholder="Importe" matInput  formControlName="importe" />
+
+                <mat-error
+                style="margin-top: 25px"
+                *ngIf="this.formulario1.get('importe')?.invalid "
+                > El campo Importe es necesario </mat-error
+              >
+              </mat-form-field>
+              <mat-error
+              style="margin-top: 25px"
+              *ngIf="this.formulario1.get('importe')?.value >importeFinal && importeFinal>0"
+              > El tope maximo es de    {{importeFinal}}  soles  </mat-error
+            >
+            </div>
+
+            <mat-form-field appearance="outline" class="input">
+
+              <input
+                [formControl]="stateProveedores"
+
+                type="text"
+                style="padding-left: 15px; width: 98%"
+                matInput
+                (ngModelChange)="validarProveedor()"
+                placeholder="Selecciona el proveedor"
+                [matAutocomplete]="auto4"
+              />
+              <mat-autocomplete #auto4="matAutocomplete">
+                <mat-option
+                  *ngFor="let state of filteredProveedores | async"
+                  [value]="state.nombre"
+                >
+                  {{ state.nombre }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="btnAdd" *ngIf="responseCoberturas.length > 0">
+          <div class="divContainer" (click)="validarFormulario()" [ngClass]="this.formulario1.valid? 'divContainer':'divContainerDisabled'">
+            <div class="textAdd">Agregar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div
+    style="border-radius: 24px; width: 94%; background-color: white"
+    *ngIf="arrayTable.length > 0"
+  >
+    <div class="outlet-hijo3">
+      <div class="main-table">
+        <div class="table-body">
+          <table>
+            <tr style="background: #d5edff; height: 2.8rem">
+              <td>
+                <h4>
+                  Motivo
+                  <img src="../../../../assets/svg/sort.svg" alt="" />
+                </h4>
+              </td>
+              <td>
+                <h4>
+                  Descripción
+                  <img src="../../../../assets/svg/sort.svg" alt="" />
+                </h4>
+              </td>
+              <td>
+                <h4>
+                  Importe
+                  <img src="../../../../assets/svg/sort.svg" alt="" />
+                </h4>
+              </td>
+              <td>
+                <h4>
+                  Proveedor<img src="../../../../assets/svg/sort.svg" alt="" />
+                </h4>
+              </td>
+              <td>
+                <h4>
+                  Eliminar
+                  <img src="../../../../assets/svg/sort.svg" alt="" />
+                </h4>
+              </td>
+            </tr>
+            <tr class="table-body-row" *ngFor="let item of arrayTable">
+              <td>{{ item.motivos.descripcion }}</td>
+              <td>{{ item.producto.producto }}</td>
+              <td>{{ item.importe }}</td>
+              <td>{{ item.proveedor.nombre }}</td>
+              <td>
+                <img
+                  (click)="delete(item.id)"
+                  src="../../../../assets/svg/autorizaciones/trash.svg"
+                  alt=""
+                />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+     (click)="generarAutorizacion()"   [ngClass]="this.arrayTable.length >0? 'btnAutorizacion':'btnAutorizacionDisabled'" >
+    <p class="text">Generar Autorizacion ></p>
+  </div>
+
+  <app-loading *ngIf="loading"></app-loading>
+</div>

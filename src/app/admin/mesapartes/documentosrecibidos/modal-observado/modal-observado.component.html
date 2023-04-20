@@ -1,0 +1,50 @@
+<div class="wildcard-automatic-debit-declaration-modal">
+    
+        <img       src="../../../../assets/svg/mesa-de-partes/observadas.svg"  style="margin-bottom: 14px; margin-top: 30px;" alt="">
+        <form
+        class="fo"
+        [formGroup]="formu"
+        style="
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+        "
+      >
+        <div class="containerObservado">
+            <div class="motivo" >
+                <p class="title" >1.Motivo</p>
+                <mat-select
+                formControlName="sele1"
+                class="select-page2"
+                placeholder="Selecciona"
+                style="padding-left: 20px"
+              >
+                <mat-option [value]="0">Seleccionar canal</mat-option>
+      
+                <mat-option [value]="item.id" *ngFor="let item of tipoObservado">
+                  {{ item.nombre | titlecase }}
+                </mat-option>
+              </mat-select>
+            </div>
+           
+            <div class="descripcion">
+                <p class="title">2.Descripcion</p>
+                
+                <div class="input">            <textarea
+                    matInput
+                    formControlName="motivo"
+                    class="textarea"
+                  ></textarea></div>
+                
+            </div>
+        </div>
+       
+        <div  class="btnSuccess" (click)="validar()">
+            Guardar
+            
+        </div>
+        </form>
+  </div>
+  <app-loading *ngIf="loading"></app-loading>

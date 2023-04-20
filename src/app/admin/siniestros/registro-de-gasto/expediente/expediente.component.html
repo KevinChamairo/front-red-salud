@@ -1,0 +1,260 @@
+<div></div>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+  "
+  
+>
+  <div class="filter">
+    <div class="title">
+      <h4 class="titleAfiliado">Expediente</h4>
+    </div>
+    <div class="row1">
+      <div
+        class="divName"
+        style="width: 30%; display: flex; align-items: center"
+      >
+        <h4 class="name">Adjuntar Expediente</h4>
+        <div class="containerInput" style="align-items: center">
+          <input
+            class="inputRazonSocial"
+            matInput
+            readonly="true"
+            placeholder="Expediente"
+            [value]="nameFile"
+            (click)="mostrarArchivo()"
+          />
+          <div class="iconUrl" style="margin-right: 20px; margin-top: 8px">
+            <input
+              style="display: none"
+              type="file"
+              #uploadImg
+              (change)="upload($event)"
+              multiple
+            />
+            <img
+              (click)="uploadImg.click()"
+              src="../../../../assets/svg/mesa-de-partes/subir-archivo.svg"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="divName"
+        style="width: 30%; display: flex; align-items: center"
+      >
+        <h4 class="name">Fecha de Emision</h4>
+        <div class="containerInput" style="align-items: center">
+          <input
+            style="font-weight: bold"
+            matInput
+            [matDatepicker]="picker"
+            placeholder="dd/mm/aaaa"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+      </div>
+
+      <div
+        class="divName"
+        style="width: 30%; display: flex; align-items: center"
+      >
+        <h4 class="name">Importe</h4>
+        <div class="containerInput" style="align-items: center">
+          <input
+            style="font-weight: bold"
+            class="inputRazonSocial"
+            matInput
+            placeholder="Importe"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row1">
+      <div
+        class="divName"
+        style="width: 30%; display: flex; align-items: center"
+      >
+        <h4 class="name">Serie</h4>
+        <div
+          class="containerInput"
+          style="align-items: center; margin-left: 120px"
+        >
+          <input
+            style="font-weight: bold"
+            class="inputRazonSocial"
+            matInput
+            placeholder="Serie"
+          />
+        </div>
+      </div>
+
+      <div
+        class="divName"
+        style="width: 30%; display: flex; align-items: center"
+      >
+        <h4 class="name">Correlativo</h4>
+        <div
+          class="containerInput"
+          style="align-items: center; margin-left: 60px"
+        >
+          <input
+            style="font-weight: bold"
+            class="inputRazonSocial"
+            matInput
+            placeholder="Correlativo"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex">
+      <div style="width: 100%">
+        <div style="    display: flex;
+        justify-content: space-between;">
+          <div class="title">
+            <div style="display: flex;
+            margin-right: 360px;
+            align-items: center;">
+              <h4 class="titleAfiliado">Diagnóstico Principal</h4>
+              <div class="btnAñadir" (click)="addDiagnostico()">
+                <p class="txtBtn">Añadir diagnóstico</p>
+              </div>
+            </div>
+            <div class="title" style="margin:0">
+              <h4 class="titleAfiliado">Motivo de Consulta</h4>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <div *ngIf="diagnostico.length > 0">
+          
+          <div
+            style="
+              display: flex;
+              margin-left: 20px;
+              margin-bottom: 20px;
+              align-items: center;
+            "
+            *ngFor="let item of diagnostico; let i = index"
+            [formGroup]="diagnosticosForm[i]"
+          >
+          <div style="
+          display: flex;
+          margin-left: 20px;
+          margin-bottom: 20px;
+          align-items: center;
+          width:680px;
+          margin-right:100px
+        ">
+            <div class="diagnostico">
+              <input
+                type="text"
+                [id]="item.id"
+                formControlName="diagnostico"
+                placeholder="Agregar...."
+              />
+            </div>
+            <mat-radio-group
+              class="che"
+              style="margin: 0px 20px; display: flex; flex-direction: column"
+            >
+              <mat-radio-button
+                (click)="
+                  this.diagnosticosForm[i].get('tipo')?.setValue('presuntivo')
+                "
+                value="1"
+                style="margin-bottom: 15px"
+              >
+                <h4>Presuntivo</h4>
+              </mat-radio-button>
+
+              <mat-radio-button
+                (click)="
+                  this.diagnosticosForm[i].get('tipo')?.setValue('definitivo')
+                "
+                value="2"
+              >
+                <h4>Definitivo</h4>
+              </mat-radio-button>
+            </mat-radio-group>
+            <div
+              style="
+                display: flex;
+
+                justify-content: space-between;
+                margin-right: 20px;
+              "
+            >
+              <img
+                (click)="addComent(item)"
+                src="../../../../../assets/svg/siniestros/add.svg
+              "
+                alt=""
+                style="margin-right: 50px; cursor: pointer"
+                *ngIf="item.comentario !== true"
+              />
+
+              <div
+                style="
+                  display: flex;
+
+                  justify-content: space-between;
+                "
+                *ngIf="item.comentario == true"
+              >
+                <div class="diagnostico">
+                  <input
+                    type="text"
+                    formControlName="comentario"
+                    placeholder="Comentario...."
+                  />
+                </div>
+              </div>
+              <img
+                (click)="delete(item.id)"
+                src="../../../../assets/svg/autorizaciones/trash.svg"
+                width="33px"
+                height="32px"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="diagnostico">
+            <input
+              type="text"
+             
+              formControlName="motivo"
+              placeholder="Motivo de Consulta"
+            />
+          </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <div></div>
+  </div>
+</div>

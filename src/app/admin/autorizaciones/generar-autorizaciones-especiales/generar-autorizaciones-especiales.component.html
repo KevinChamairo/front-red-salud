@@ -1,0 +1,67 @@
+
+<form [formGroup]="filtroFG"
+style="
+width: 100%;
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+"
+
+>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  "
+>
+  <div class="filter">
+    <div class="fechas" >
+      <div class="fecha">
+        <h4>DNI</h4>
+        <mat-form-field appearance="outline" class="input">
+          <input style="padding-left: 10px" matInput formControlName="dni" />
+          <mat-error
+          style="margin-top: 25px"
+          *ngIf="filtroFG.controls.dni.invalid"
+          >El campo DNI es requerido</mat-error
+        >
+        </mat-form-field>
+
+      </div>
+      <div class="fecha">
+        <h4>OA</h4>
+        <mat-form-field appearance="outline" class="input">
+          <input
+            style="padding-left: 10px"
+            matInput
+
+            formControlName="oa"
+          />
+          <mat-error
+          style="margin-top: 25px"
+          *ngIf="filtroFG.controls.oa.invalid"
+          >El campo OA es requerido</mat-error
+        >
+        </mat-form-field>
+
+      </div>
+      <button class="bo" (click)="consultar()">
+        <p>Buscar</p>
+        <mat-icon class="ico">chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="mostrartabla" style="width: 100% ;">
+    <app-datos-afiliado style="width: 100%" [dataafiliado]="dataAfiliado" ></app-datos-afiliado>
+    <app-cargar-expediente style="width: 100%"  [motivos]="dataAfiliado" [oa]="ordenAtencion"       (resetear)="resetear($event)"></app-cargar-expediente>
+  </div>
+
+  <app-loading *ngIf="loading"></app-loading>
+</div>
+
+</form>
+

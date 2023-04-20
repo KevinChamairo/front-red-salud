@@ -1,0 +1,203 @@
+<div
+  style="
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  "
+  *ngIf="mostrarTabla"
+>
+<div class="outlet-hijo" >
+  <!-- <div class="outlet-hijo" *ngIf="mostrartabla && ModuloBuscarDocumentos" > -->
+    <div class="main-table">
+      <div class="table-head">
+        <div class="paginador">
+          <h4>Mostrar</h4>
+          <div class="sell" style="position: relative">
+            <!-- <mat-icon class="flecha">expand_more</mat-icon> -->
+            <select class="select-pag">
+              <option value="10" selected>10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <p style="color: #01387b; font-weight: 400; margin-left: 6px">
+            Registros
+          </p>
+        </div>
+        <div class="divEstado">
+          <span style="font-weight: bold; color: #01387b; margin-right: 10px"
+            >Estado CDR</span
+          >
+          <mat-form-field class="input-child-3" appearance="outline">
+            <mat-select
+              [(ngModel)]="esta"
+              name="esta"
+              placeholder="Ver todos"
+              (selectionChange)="estado()"
+            >
+              <mat-option [value]="1"> Ver Todos </mat-option>
+              <mat-option [value]="2"> Abierto </mat-option>
+              <mat-option [value]="3">  Cerrado </mat-option>
+              <!-- <mat-option [value]="4"> Rechazado </mat-option>
+              <mat-option [value]="5"> Anulado </mat-option> -->
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="space"></div>
+        <div class="buscador" style="width: 100%  !important;">
+          <input type="text" class="buscador-input" placeholder="Buscar"  [(ngModel)]="valueInput"   (ngModelChange)="filtrarSearch()"/>
+          <img class="lupa" src="../../../../assets/svg/lupa.svg" alt="" />
+        </div>
+        <div class="filtro"></div>
+      </div>
+
+      <div  class="table-body">
+        <table matSort (matSortChange)="sortData($event)">
+          <tr style="    background: #d5edff;
+          height: 2.8rem;">
+            <td mat-sort-header="numero">
+
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Nº <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="ruc">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">RUC Proveedor <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="proveedor">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Proveedor<img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="oa">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Nº OA <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="fecha_atencion">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Fecha de atención <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="plan">
+              <h4 style="    margin: 0px 10px 10px 0px !important;">Plan <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="especialidad">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Especialidad <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="comprobante">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Comprobante<img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="afiliado">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Afiliado <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="estado">
+              <h4 style="    margin: 0px 0px 10px 0px !important;">Estado <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+            </td>
+            <td mat-sort-header="usuario">
+                <h4 style="    margin: 0px 0px 10px 0px !important;">Acciones <img src="../../../../assets/svg/sort.svg" alt="" /></h4>
+              </td>
+          </tr>
+          <tr
+            *ngFor="
+              let item of dataAfiliado
+                | paginate
+                  : {
+                      id: 'paginador2',
+                      itemsPerPage: grupo2,
+                      currentPage: page2
+                    }
+
+            ;let i = index        "
+            class="table-body-row"
+          >
+          <td>{{ i+1}}</td>
+            <td>{{ item.ruc }}</td>
+            <td>{{ item.nombre_comercial }}</td>
+            <td>{{ item.num_orden_atencion }}</td>
+            <td>{{ item.fecha_atencion }}</td>
+            <td>{{ item.nombre_plan }}</td>
+            <td>{{ item.nombre_esp }}</td>
+            <td>{{ item.comprobante }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.estado_siniestro == 1? "Atención abierta":"Atención cerrada" }}</td>
+            <td style="padding-top: 5px;padding-bottom: 5px;"><div style="display:flex; justify-content: space-evenly;" *ngIf="!item.state">
+                  <div class="check" (click)="addState(item)"> <img src="../../../../assets/svg/mesa-de-partes/btnsuccess.svg" alt="" /></div>
+                  <div class="deletebtn"  (click) = "openDialog(item)"    ><img src="../../../../assets/svg/mesa-de-partes/btndelete.svg" alt="" /></div>
+            </div>
+
+            <div *ngIf="item.state"><div class="btnRegistro" (click)="mostrarRegistro()"> <p class="textRegister"> Registrar Gasto</p></div></div>
+          </td>
+          </tr>
+        </table>
+      </div>
+      <div
+
+        class="table-foot"
+      >
+        <h4>
+          Del
+          {{ ((page2 > 1 ? page2 : 1) - 1) * grupo2 + 1 }} al
+          {{
+            ((page2 > 1 ? page2 : 1) - 1) * grupo2 + grupo2 > pc.getTotalItems()
+              ? pc.getTotalItems()
+              : (((page > 1 ? page2 : 1) - 1) * grupo2 + grupo2 | number: "2.0")
+          }}
+          de {{ pc.getTotalItems() }} registros
+        </h4>
+        <div class="foot-botones">
+          <pagination-template
+            id="paginador2"
+            #pc="paginationApi"
+            (pageChange)="page2 = $event"
+          >
+            <div class="custom-pagination">
+              <button
+                mat-mini-fab
+                (click)="pc.previous()"
+                disabled="{{ pc.isFirstPage() }}"
+                class="foot-boton {{ pc.isFirstPage() ? 'blanco' : '' }} "
+              >
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+              <div
+                class="page-number"
+                *ngFor="let page2 of pc.pages"
+                [class.current]="pc.getCurrent() === page2.value"
+              >
+                <span
+                  (click)="pc.setCurrent(page2.value)"
+                  *ngIf="pc.getCurrent() !== page2.value"
+                  >{{ page2.label }}</span
+                >
+                <div *ngIf="pc.getCurrent() === page2.value">
+                  <span>{{ page2.label }}</span>
+                </div>
+              </div>
+              <button
+                mat-mini-fab
+                (click)="pc.next()"
+                disabled="{{ pc.isLastPage() }}"
+                class="foot-boton {{ pc.isLastPage() ? 'blanco' : '' }} "
+              >
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </pagination-template>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #nodata>
+      <tr>
+        <td>No hay data</td>
+      </tr>
+    </ng-template>
+
+
+
+
+
+      <app-loading *ngIf="loading"></app-loading>
+
+    </div>
+
+</div>
+<app-datos-afiliado *ngIf="mostrarRegistroGasto"></app-datos-afiliado>
+<app-expediente *ngIf="mostrarRegistroGasto"></app-expediente>
+<app-acordeon-medicinas ></app-acordeon-medicinas>

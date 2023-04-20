@@ -1,0 +1,430 @@
+<div class="containerFiltro">
+  <form
+    class="fo"
+    [formGroup]="formulario1"
+    style="
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    "
+  >
+    <div class="filter">
+      <div class="containerLine1">
+        <div class="container_select">
+          <h3>Tipo de Documento</h3>
+          <mat-select
+            formControlName="sele1"
+            class="select-pag2"
+            placeholder="Selecciona"
+            (selectionChange)="change1()"
+            (ngModelChange)="enviaralHijo()"
+            style="padding-left: 20px"
+          >
+            <mat-option [value]="0">Seleccionar canal</mat-option>
+
+            <mat-option [value]="item.id" *ngFor="let item of TipoDocumento">
+              {{ item.tipo_documento | titlecase }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div
+          [ngClass]="TipoFormulario == 1 ? 'formulario1' : 'formulariodisabled'"
+        >
+          <form
+            [formGroup]="formulario1"
+            class="containerFormulario1"
+            autocomplete="off"
+          >
+            <div>
+              <h1 class="Documento">Serie</h1>
+              <mat-form-field appearance="outline">
+                <input
+                  (change)="serieCorrecta()"
+                  (ngModelChange)="validarcambios()"
+                  matInput
+                  formControlName="serie"
+                  placeholder="Ingresa N° Documento"
+                />
+                <mat-error
+                  style="margin-top: 10px"
+                  *ngIf="formulario1.controls.serie.invalid"
+                  >El campo Serie es requerido</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div>
+              <h1 class="Documento">Numero</h1>
+              <mat-form-field appearance="outline">
+                <input
+                  (change)="numeroCorrecto()"
+                  matInput
+                  (ngModelChange)="validarcambios()"
+                  formControlName="numero"
+                  placeholder="Ingresa el numero"
+                />
+                <mat-error
+                  style="margin-top: 10px"
+                  *ngIf="formulario1.controls.numero.invalid"
+                  >El campo Numero es requerido</mat-error
+                >
+                <div
+                  *ngIf="comprobanteregistrado"
+                  style="
+                    margin-top: 13px;
+                    position: absolute;
+                    margin-bottom: 0px !important;
+                    width: 380px;
+                  "
+                >
+                  <p
+                    style="
+                      font-size: 14px;
+                      color: #2271bf;
+                      font-family: Roboto;
+                      line-height: 16px;
+                      letter-spacing: 0.03px;
+                      font-weight: 500;
+                      padding-top: 5px;
+                      padding-bottom: 5px;
+                    "
+                  >
+                    Comprobante registrado se encuentra en Mesa de Partes
+                  </p>
+                </div>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <h1 class="Documento">RUC</h1>
+              <mat-form-field appearance="outline" class="input">
+                <input
+                  maxlength="11"
+                  [(ngModel)]="valueVariable"
+                  (ngModelChange)="changed()"
+                  matInput
+                  formControlName="ruc"
+                  placeholder="Ingresa el numero de Ruc"
+                />
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+
+        <!-- FORMULARIO PARA TICKET - RECIBO - NOTA DE VENTA -->
+        <div
+          [ngClass]="TipoFormulario == 2 ? 'formulario1' : 'formulariodisabled'"
+        >
+          <form
+            [formGroup]="formulario2"
+            class="containerFormulario1"
+            autocomplete="off"
+          >
+            <div>
+              <h1 class="Documento">N° Documento</h1>
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  formControlName="nDocumento"
+                  placeholder="Ingresa N° Documento"
+                />
+                <mat-error style="margin-top: 10px" *ngIf="documentoCorrecto()"
+                  >El campo nombre es requerido</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div>
+              <h1 class="Documento">Remitente</h1>
+              <mat-form-field appearance="outline">
+                <input
+                  matInput
+                  formControlName="remitente"
+                  placeholder="Ingresa el N° remitente"
+                />
+                <mat-error style="margin-top: 10px" *ngIf="remitenteCorrecto()"
+                  >El campo nombre es requerido</mat-error
+                >
+              </mat-form-field>
+            </div>
+
+            <div>
+              <h1 class="Documento">Fecha Recepción</h1>
+              <mat-form-field appearance="outline" class="input">
+                <input
+                  style="padding-left: 10px"
+                  readonly
+                  matInput
+                  [matDatepicker]="picker2"
+                  placeholder="dd/mm/aaaa"
+                  formControlName="fechaven"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+
+                <mat-error style="margin-top: 15px" *ngIf="fechaCorrecta()"
+                  >El campo nombre es requerido</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+        [ngClass]="
+          TipoFormulario == 2
+            ? 'containerLine2'
+            : TipoFormulario == 0
+            ? 'containerLine2Disabled'
+            : 'containerLine2Disabled'
+        "
+        *ngIf="TipoFormulario == 2"
+      >
+        <form [formGroup]="formulario2" autocomplete="off">
+          <h1 class="asunto">Asunto</h1>
+
+          <div class="textArea">
+            <textarea
+              matInput
+              formControlName="asunto"
+              class="textAreaMovido"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+
+      <div
+        [ngClass]="
+          TipoFormulario == 1
+            ? 'containerLine1'
+            : TipoFormulario == 0
+            ? 'containerLine2Disabled'
+            : 'containerLine2Disabled'
+        "
+        *ngIf="TipoFormulario == 1"
+      >
+        <form
+          [formGroup]="formulario1"
+          class="containerFormulario1"
+          autocomplete="off"
+        >
+          <div style="width: 30%">
+            <h1 class="Documento">Razon Social</h1>
+            <div class="containerInput">
+              <input
+                class="inputRazonSocial"
+                matInput
+                formControlName="razonSocial"
+                (ngModelChange)="enviaralHijo()"
+              />
+            </div>
+            <div
+              *ngIf="redmedica == 1"
+              style="
+                margin-top: -15px;
+                margin-left: 20px !important;
+                width: 380px;
+              "
+            >
+              <p
+                style="
+                  font-size: 14px;
+                  color: #2271bf;
+                  font-family: Roboto;
+                  line-height: 16px;
+                  letter-spacing: 0.03px;
+                  font-weight: 500;
+                  padding-top: 5px;
+                  padding-bottom: 5px;
+                "
+              >
+                Pertenece a Red Médica
+              </p>
+            </div>
+          </div>
+          <div style="width: 30%">
+            <h1 class="Documento">Nombre Comercial</h1>
+            <div class="containerInput">
+              <input
+                class="inputRazonSocial"
+                matInput
+                formControlName="nombreComercial"
+                (ngModelChange)="enviaralHijo()"
+              />
+            </div>
+          </div>
+          <div style="width: 30%">
+            <h1 class="Documento">Adjuntar Factura</h1>
+            <div class="containerInput" style="align-items: center;">
+              <input
+             
+                class="inputRazonSocial"
+                matInput
+                readonly="true"
+                placeholder="Factura"
+                [value]="nameFile"
+                (click)="mostrarArchivo()"
+              />
+              <div class="iconUrl" style="    margin-right: 20px;
+              margin-top: 8px;">
+                <input style="display: none;" type="file" #uploadImg (change)="upload($event)"
+                multiple>
+                <img (click)="uploadImg.click()" src="../../../../assets/svg/mesa-de-partes/subir-archivo.svg" alt="">
+               
+            </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div
+        [ngClass]="
+          TipoFormulario == 1
+            ? 'containerLine12'
+            : TipoFormulario == 0
+            ? 'containerLine2Disabled'
+            : 'containerLine2Disabled'
+        "
+        *ngIf="TipoFormulario == 1"
+      >
+        <form
+          [formGroup]="formulario1"
+          class="containerFormulario1"
+          autocomplete="off"
+        >
+          <div class="btnFechas">
+            <div class="btnFechaEmi">
+              <h1 class="Documento">Fecha Emision</h1>
+              <div class="containerInput">
+                <input
+                  style="padding-left: 15px"
+                  readonly
+                  matInput
+                  (ngModelChange)="enviaralHijo()"
+                  [matDatepicker]="picker2"
+                  placeholder="dd/mm/aaaa"
+                  formControlName="fecha_emision"
+                />
+                <mat-datepicker-toggle
+                  [disabled]="fechaRecepcionDisabled()"
+                  matSuffix
+                  [for]="picker2"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </div>
+            </div>
+
+            <div class="btnFechaRecep">
+              <h1 class="Documento">Fecha Recepción</h1>
+              <div class="containerInput">
+                <input
+                  style="padding-left: 15px"
+                  readonly
+                  matInput
+                  (ngModelChange)="enviaralHijo()"
+                  [matDatepicker]="picker3"
+                  placeholder="dd/mm/aaaa"
+                  formControlName="fecha_recepcion"
+                />
+                <mat-datepicker-toggle
+                  [disabled]="fechaRecepcionDisabled()"
+                  matSuffix
+                  [for]="picker3"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </div>
+            </div>
+          </div>
+          <div class="importeOA">
+            <div class="btnFechaEmi">
+              <h1 class="Documento">Importe</h1>
+              <div class="containerInput">
+                <input
+                  formControlName="importe"
+                  (ngModelChange)="enviaralHijo()"
+                  style="padding-left: 15px"
+                  matInput
+                />
+              </div>
+            </div>
+
+            <div class="btnFechaRecep">
+              <div
+                (click)="addOA()"
+                [ngClass]="btnActiveOA == true ? 'btnOA' : 'btnOADisabled'"
+              >
+                <span> Agregar OA</span>
+              </div>
+            </div>
+          </div>
+          <!-- <div style="width: 30%">
+            <h1 class="Documento">Importe</h1>
+            <div class="containerInput">
+              <input
+                class="inputRazonSocial"
+                matInput
+                formControlName="nombreComercial"
+              />
+            </div>
+          </div> -->
+        </form>
+      </div>
+    </div>
+
+    <div class="btnGuardar" *ngIf="TipoFormulario == 2">
+      <h1
+        [ngClass]="
+          estaValidado == false ? 'styleBtnGuardarDisabled' : 'styleBtnGuardar'
+        "
+        (click)="ValidarFormulario()"
+      >
+        Guardar
+      </h1>
+    </div>
+
+    <div
+      style="
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      "
+      *ngIf="TipoFormulario == 1 && mostrarOA == true"
+    >
+      <app-oa
+        (value)="method($event)"
+        [data]="datosBoletaOa"
+        [importe]="datosInfoCambiante"
+        style="
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        "
+      ></app-oa>
+    </div>
+
+    <div
+      style="
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      "
+      *ngIf="TipoFormulario == 1"
+    >
+      <app-btn-accept
+        style="width: 100%"
+        [valueform]="datosInfoCambiante"
+        (limpiar)="limpiar($event)"
+      ></app-btn-accept>
+    </div>
+  </form>
+
+  <app-loading *ngIf="loading"></app-loading>
+</div>

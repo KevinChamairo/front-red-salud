@@ -1,0 +1,254 @@
+// Grupo de inputs de manera horizontal
+.input-group {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.input-group-5 {
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.input-group-2 {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 29% 29% 29%;
+  gap: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.input-group-2-modal {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+// Grupo de inputs horizontales a lo largo del 100%
+.input-group-3 {
+  width: 95%;
+  margin: 1.5rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+.input-group-4 {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+}
+
+.input {
+  width: 30%;
+  margin-right: 2.5%;
+  margin-left: 1rem;
+}
+
+.input-c {
+  width: 30%;
+}
+.input-modal {
+  width: 100%;
+}
+
+.input-2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-4 {
+  width: 100%;
+  h4 {
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+}
+
+.input-5 {
+  width: 91%;
+  margin: 0 auto;
+}
+.input-7 {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.input-3 {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-6 {
+  width: 75%;
+}
+
+.input-group-two-inputs {
+  width: 60%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-for-two {
+  width: 60%;
+  align-items: center;
+}
+
+.input-child-for-two {
+  width: 80%;
+  input {
+    color: #6a7183;
+  }
+}
+
+.input-child-direccion {
+  width: 100%;
+}
+
+.input-group-tree-inputs {
+  width: 90%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-select {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-3-up {
+  width: 50%;
+  display: flex;
+}
+
+.input:last-child {
+  margin: 0;
+}
+
+.input-70 {
+  width: 60.5%;
+  margin-right: 5.5%;
+  margin-left: 1rem;
+}
+
+.input-100 {
+  width: 100%;
+  margin-left: 1rem;
+}
+
+.input-100-i {
+  width: 100%;
+  margin-left: 1rem;
+  margin-right: 1.8rem;
+}
+
+.input input,
+.input-2 input,
+.input-3 input,
+.input-4 input,
+.input-5 input,
+.input-6 input,
+.input-c input,
+.input-70 input,
+.input-modal input {
+  color: #6a7183;
+}
+
+.input-100 textarea {
+  color: #6a7183;
+}
+
+.input-child {
+  width: 90%;
+}
+.input-child-c {
+  width: 100%;
+}
+
+.input-child-2 {
+  width: 60%;
+  margin-right: 3rem;
+}
+
+.input-child-3 {
+  width: 60%;
+  margin-right: 5rem;
+}
+
+.input-child-4 {
+  width: 100%;
+}
+
+.input-child-5 {
+  width: 91%;
+}
+
+.input-child-call {
+  width: 60%;
+  border: 2px solid #008467;
+  border-radius: 31px;
+  text-align: center;
+}
+
+.input-child-call {
+  input {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: 0.0380952px;
+    color: #008467;
+  }
+}
+
+.input-modal .input-child {
+  width: 100%;
+}
+
+.input-70 .input-child {
+  width: 100%;
+}
+
+.input-100 .input-child {
+  width: 95%;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+}
+
+.input-child22 {
+  width: 33rem !important;
+}
+
+.solo {
+  width: 100% !important;
+}
+
+.solo .largo {
+  width: 100% !important;
+}
+.inicio {
+  display: flex;
+  flex-direction: column;
+  // border: 2px solid blue;
+  width: 100%;
+  .area {
+    border: 1px solid red;
+  }
+}
+
+.anexoin .mat-form-field-flex {
+  width: 5% !important;
+}
